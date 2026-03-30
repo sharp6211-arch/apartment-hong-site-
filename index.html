@@ -2,6 +2,22 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <script>
+    (function () {
+        if (!/github\.io$/i.test(location.hostname)) return;
+        var path = location.pathname;
+        var segs = path.split('/').filter(Boolean);
+        if (segs.length === 0) return;
+        var basePath = '/' + segs[0] + '/';
+        if (segs.length === 1 && !path.endsWith('/') && path.indexOf('.') === -1) {
+            location.replace(basePath + location.search + location.hash);
+            return;
+        }
+        var b = document.createElement('base');
+        b.href = location.origin + basePath;
+        document.head.insertBefore(b, document.head.firstChild);
+    })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아파트 분양 홍보 사이트</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
